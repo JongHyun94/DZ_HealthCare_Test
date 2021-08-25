@@ -5,8 +5,8 @@ function MemberItem() {
   //const { member, buttonHandler } = props;
   const [member, setMember] = useRecoilState<memberInfo>(amember);
 
-  const buttonHandler = () => {
-
+  const buttonHandler = (member: memberInfo) => {
+    setMember(member);
   };
 
   return (

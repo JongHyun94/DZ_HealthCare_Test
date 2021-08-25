@@ -13,13 +13,7 @@ function Contact(props : any) {
     // 검색창 상태
     const [searchKeyword, setSearchKeyword] = useState('');
     // 선택된 멤버 상태
-    const setSelectedMember = useSetRecoilState<memberInfo | undefined>(amember);
-
-   
-
-    const buttonHandler = (member : memberInfo) => {
-        setSelectedMember(member);
-    };
+    const setSelectedMember = useSetRecoilState<memberInfo>(amember);
 
     const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchKeyword(e.target.value);
