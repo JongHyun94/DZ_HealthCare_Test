@@ -6,10 +6,10 @@ import MemberItem from "./components/MemberItem";
 import SearchBox from "./components/SearchBox";
 
 function Contact(props : any) {
-    // 멤버 리스트 전역 상태
-    const [filterMember, setFilterMember] = useRecoilState(smember);
+    // 멤버 리스트 검색 상태
+    const [memberList, setMemberList] = useRecoilState(smember);
     // 멤버 리스트 상태
-    const [memberList, setMemberList] = useState(filterMember);
+    const [filterMember, setFilterMember] = useState(memberList);
     // 검색창 상태
     const [searchKeyword, setSearchKeyword] = useState('');
     // 선택된 멤버 상태
