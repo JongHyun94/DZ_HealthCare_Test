@@ -56,7 +56,7 @@ export const fmember = atom<memberInfo[]>({
 });
 
 // 선택된 멤버 
-export const amember = atom<memberInfo | undefined>({
+export const amember = atom<memberInfo>({
   key: 'smember',
   default: 
     {

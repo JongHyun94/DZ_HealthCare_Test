@@ -1,5 +1,14 @@
-function MemberItem(props : any) {
-  const { member, buttonHandler } = props;
+import { useRecoilState } from "recoil";
+import { amember, memberInfo } from "../../../../recoil/contact";
+
+function MemberItem() {
+  //const { member, buttonHandler } = props;
+  const [member, setMember] = useRecoilState<memberInfo>(amember);
+
+  const buttonHandler = () => {
+
+  };
+
   return (
     <>
       <li key={member.id}>

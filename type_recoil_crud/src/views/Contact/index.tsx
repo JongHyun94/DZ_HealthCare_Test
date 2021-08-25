@@ -51,7 +51,7 @@ function Contact(props : any) {
                        <ul>
                         {filterMember.map((member) => {
                             return (
-                                <MemberItem key={member.id} member={member} buttonHandler={buttonHandler} />
+                                <MemberItem />
                             );
                         })}
                         </ul>
