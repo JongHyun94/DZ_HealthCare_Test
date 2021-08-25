@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {useRecoilState} from "recoil";
+import {useRecoilValue} from "recoil";
 import { memberInfo, smember } from "../../recoil/contact";
 import ContactDetail from "./components/ContactDetail";
 import MemberItem from "./components/MemberItem";
@@ -7,7 +7,7 @@ import SearchBox from "./components/SearchBox";
 
 function Contact(props : any) {
     // 멤버 리스트 검색 상태
-    const [memberList, setMemberList] = useRecoilState(smember);
+    const memberList = useRecoilValue(smember);
     // 멤버 리스트 상태
     const [filterMember, setFilterMember] = useState(memberList);
     // 검색창 상태
