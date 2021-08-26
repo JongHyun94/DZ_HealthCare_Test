@@ -1,10 +1,12 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { amember, estate, fmember, memberInfo } from "../../../../recoil/contact";
+import { amember, estate, fmember, memberInfo, smember } from "../../../../recoil/contact";
 
 function MemberTable() {
+  const origMember = useRecoilValue<memberInfo[]>(smember);
+  
   const filterMember = useRecoilValue<memberInfo[]>(fmember);
 
-  const setMember = useSetRecoilState<memberInfo>(amember);
+  const setMember = useSetRecoilState<memberInfo | undefined>(amember);
 
   const setEditState = useSetRecoilState<string>(estate);
   
@@ -12,6 +14,9 @@ function MemberTable() {
     setMember(member);
     setEditState("read");
   };
+
+  console.log("origMEMBER",origMember);
+  console.log("filterMEMBER",filterMember);
   return (
     <>
       <div className="contact-list">
@@ -24,7 +29,8 @@ function MemberTable() {
                 </button>
               </li>
             );
-          })}
+          })
+          }
         </ul>
       </div>
     </>
