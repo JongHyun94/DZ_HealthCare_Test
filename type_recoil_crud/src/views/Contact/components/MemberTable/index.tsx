@@ -2,7 +2,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { amember, estate, fmember, memberInfo, smember } from "../../../../recoil/contact";
 
 function MemberTable() {
-  const origMember = useRecoilValue<memberInfo[]>(smember);
+  //const origMember = useRecoilValue<memberInfo[]>(smember);
   
   const filterMember = useRecoilValue<memberInfo[]>(fmember);
 
@@ -14,9 +14,6 @@ function MemberTable() {
     setMember(member);
     setEditState("read");
   };
-
-  console.log("origMEMBER",origMember);
-  console.log("filterMEMBER",filterMember);
   return (
     <>
       <div className="contact-list">

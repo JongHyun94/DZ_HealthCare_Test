@@ -26,7 +26,6 @@ function SearchBox() {
         } 
       })
     );
-    console.log(origMember);
     setResetMember({
       id: -1,
       name: "",
