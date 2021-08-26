@@ -1,5 +1,5 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { amember, estate, fmember, memberInfo, smember } from "../../../../recoil/contact";
+import { amember, estate, fmember, memberInfo } from "../../../../recoil/contact";
 
 function MemberTable() {
   //const origMember = useRecoilValue<memberInfo[]>(smember);
