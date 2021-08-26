@@ -94,18 +94,10 @@ function ContactDetail() {
     let newTotalMember = JSON.parse(JSON.stringify(totalMember));
     let editMember = JSON.parse(JSON.stringify(selectedMember));
     setTotalMember(
-      newTotalMember.filter((member: { id: number }) => {
-        if (member.id !== editMember.id) {
-          return member;
-        }
-      })
+      newTotalMember.filter((member: { id: number }) => (member.id !== editMember.id))
     );
     setTotalMember2(
-      newTotalMember.filter((member: { id: number }) => {
-        if (member.id !== editMember.id) {
-          return member;
-        }
-      })
+      newTotalMember.filter((member: { id: number }) => (member.id !== editMember.id))
     );
     setEditState("");
     setKeyword("");

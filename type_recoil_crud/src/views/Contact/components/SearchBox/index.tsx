@@ -20,11 +20,7 @@ function SearchBox() {
     setSearchKeyword(e.target.value);
     let newTotalMember = JSON.parse(JSON.stringify(origMember));
     setFilterMember(
-      newTotalMember.filter((member: { name: string | string[]; }) => {
-        if (member.name.includes(e.target.value)) {
-          return member;
-        } 
-      })
+      newTotalMember.filter((member: { name: string | string[]; }) => (member.name.includes(e.target.value)))
     );
     setResetMember({
       id: -1,
