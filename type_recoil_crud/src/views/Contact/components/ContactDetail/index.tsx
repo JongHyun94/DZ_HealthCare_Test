@@ -24,7 +24,7 @@ function ContactDetail() {
   const [addMember, setAddMember] = useState<memberInfo>({
     id: nId,
     name: "",
-    department: "",
+    deptName: "",
     phone: "",
     mail: "",
   });
@@ -60,7 +60,7 @@ function ContactDetail() {
     setAddMember({
       id: id,
       name: "",
-      department: "",
+      deptName: "",
       phone: "",
       mail: "",
     });
@@ -109,7 +109,7 @@ function ContactDetail() {
         {editState === "read" && selectedMember && selectedMember.id !== -1 ? (
           <ul className="info">
             <li>이름: {selectedMember.name}</li>
-            <li>부서: {selectedMember.department}</li>
+            <li>부서: {selectedMember.deptName}</li>
             <li>휴대폰: {selectedMember.phone}</li>
             <li>메일: {selectedMember.mail}</li>
             <li className="divide_Line">---------------------------------</li>
@@ -135,8 +135,8 @@ function ContactDetail() {
             <li>
               부서:{" "}
               <input
-                name="department"
-                value={selectedMember.department}
+                name="deptName"
+                value={selectedMember.deptName}
                 onChange={editMemberState}
               />
             </li>
@@ -173,8 +173,8 @@ function ContactDetail() {
             <li>
               부서:{" "}
               <input
-                name="department"
-                value={addMember.department}
+                name="deptName"
+                value={addMember.deptName}
                 onChange={addMemberState}
               />
             </li>

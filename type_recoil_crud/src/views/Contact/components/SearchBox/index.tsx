@@ -25,7 +25,7 @@ function SearchBox() {
     setResetMember({
       id: -1,
       name: "",
-      department: "",
+      deptName: "",
       phone: "",
       mail: "",
     });

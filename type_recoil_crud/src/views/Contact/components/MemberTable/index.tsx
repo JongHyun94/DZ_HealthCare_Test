@@ -20,7 +20,7 @@ function MemberTable() {
         <ul>
           {filterMember.map((member) => {
             return (
-              <li>
+              <li key={member.id}>
                 <button type="button" onClick={() => buttonHandler(member)}>
                   {member.name}
                 </button>
