@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 
 export interface memberInfo {
-  id: number;
+  id: number|undefined;
   name: string;
   deptName: string;
   phone: string;
@@ -60,7 +60,7 @@ export const fmember = atom<memberInfo[]>({
 export const amember = atom<memberInfo | undefined>({
   key: "amember",
   default: {
-    id: -1,
+    id: undefined,
     name: "",
     deptName: "",
     phone: "",

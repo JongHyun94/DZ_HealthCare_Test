@@ -12,6 +12,7 @@ function MemberTable() {
   
   const buttonHandler = (member: memberInfo) => {
     setMember(member);
+    //console.log("select:",member);
     setEditState("read");
   };
   return (

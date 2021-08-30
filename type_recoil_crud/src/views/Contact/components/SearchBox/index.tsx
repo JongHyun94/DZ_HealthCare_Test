@@ -23,7 +23,7 @@ function SearchBox() {
       newTotalMember.filter((member: { name: string | string[]; }) => (member.name.includes(e.target.value)))
     );
     setResetMember({
-      id: -1,
+      id: undefined,
       name: "",
       deptName: "",
       phone: "",
@@ -32,6 +32,7 @@ function SearchBox() {
   };
 
   const addButtonHandler = () => {
+    setSearchKeyword("");
     setEditState("add");
   };
 

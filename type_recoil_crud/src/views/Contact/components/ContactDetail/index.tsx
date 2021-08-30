@@ -1,28 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
   smember,
   fmember,
   amember,
   estate,
-  numberId,
   memberInfo,
   keyword,
 } from "../../../../recoil/contact";
+import { createNewContact, deleteContact, getContactList, updateContact } from "../../../../utils/api/ApiService";
 
 function ContactDetail() {
-  const [totalMember, setTotalMember] = useRecoilState<memberInfo[]>(smember);
-  const setTotalMember2 = useSetRecoilState<memberInfo[]>(fmember);
+  const setContacts = useSetRecoilState<memberInfo[]>(smember);
+  const setFilterContacts = useSetRecoilState<memberInfo[]>(fmember);
   const setKeyword = useSetRecoilState<string>(keyword);
 
   const [selectedMember, setSelectedMember] = useRecoilState<
     memberInfo | undefined
   >(amember);
 
-  const [nId, setNId] = useRecoilState(numberId);
+  //const [nId, setNId] = useRecoilState(numberId);
 
   const [addMember, setAddMember] = useState<memberInfo>({
-    id: nId,
+    id: undefined,
     name: "",
     deptName: "",
     phone: "",
@@ -45,20 +45,26 @@ function ContactDetail() {
   };
 
   // 생성하기
-  const createMemberButton = () => {
-    //let newTotalMember = totalMember;
-    let newTotalMember = JSON.parse(JSON.stringify(totalMember));
-    newTotalMember.push(addMember);
-    setTotalMember(newTotalMember);
-    setTotalMember2(newTotalMember);
-    //let id = nId;
-    let id = JSON.parse(JSON.stringify(nId));
-    ++id;
-    setNId(id);
+  const createMemberButton = async () => {
+    // 상태 데이터로 저장해보기
+
+    // let newTotalMember = JSON.parse(JSON.stringify(totalMember));
+    // newTotalMember.push(addMember);
+    // setTotalMember(newTotalMember);
+    // setTotalMember2(newTotalMember);
+    // let id = JSON.parse(JSON.stringify(nId));
+    // ++id;
+    // setNId(id);
+
+    // 디비 상으로 저장 해보기
+    //console.log(addMember);
+    await createNewContact(addMember);
+    //console.log(result);
+
     // 초기화
     setEditState("");
     setAddMember({
-      id: id,
+      id: undefined,
       name: "",
       deptName: "",
       phone: "",
@@ -73,40 +79,56 @@ function ContactDetail() {
   };
 
   // 변경하기
-  const editDoneMemberButton = () => {
-    let newTotalMember = JSON.parse(JSON.stringify(totalMember));
-    let editMember = JSON.parse(JSON.stringify(selectedMember));
-    let renewTotalMember = newTotalMember.map((member: { id: number; }) => {
-      if(member.id === editMember.id){
-        return editMember;
-      } else {
-        return member;
-      }
-    });
-    setTotalMember(renewTotalMember);
-    setTotalMember2(renewTotalMember);
+  const editDoneMemberButton = async () => {
+    // 수정하기 상태로 1
+    // let newTotalMember = JSON.parse(JSON.stringify(totalMember));
+    // let editMember = JSON.parse(JSON.stringify(selectedMember));
+    // let renewTotalMember = newTotalMember.map((member: { id: number; }) => {
+    //   if(member.id === editMember.id){
+    //     return editMember;
+    //   } else {
+    //     return member;
+    //   }
+    // });
+    // setTotalMember(renewTotalMember);
+    // setTotalMember2(renewTotalMember);
+    //console.log("edit:",selectedMember);
+    await updateContact(selectedMember);
+    //console.log(result);
     setEditState("");
     setKeyword("");
   };
 
   // 삭제하기
-  const deleteMemberButton = () => {
-    let newTotalMember = JSON.parse(JSON.stringify(totalMember));
-    let editMember = JSON.parse(JSON.stringify(selectedMember));
-    setTotalMember(
-      newTotalMember.filter((member: { id: number }) => (member.id !== editMember.id))
-    );
-    setTotalMember2(
-      newTotalMember.filter((member: { id: number }) => (member.id !== editMember.id))
-    );
+  const deleteMemberButton = async () => {
+    // 삭제하기 상태로 1
+    // let newTotalMember = JSON.parse(JSON.stringify(totalMember));
+    // let editMember = JSON.parse(JSON.stringify(selectedMember));
+    // setTotalMember(
+    //   newTotalMember.filter((member: { id: number }) => (member.id !== editMember.id))
+    // );
+    // setTotalMember2(
+    //   newTotalMember.filter((member: { id: number }) => (member.id !== editMember.id))
+    // );
+
+    // 삭제하기 디비로 2
+    await deleteContact(selectedMember);
+    //console.log(result);
     setEditState("");
     setKeyword("");
   };
-
+  useEffect(()=>{
+    const getContactsFromDB = async () => {
+      let list = await getContactList();
+      setContacts(list);
+      setFilterContacts(list);
+    };
+    getContactsFromDB(); 
+  },[editState, setContacts, setFilterContacts]);
   return (
     <>
       <div className="details">
-        {editState === "read" && selectedMember && selectedMember.id !== -1 ? (
+        {editState === "read" && selectedMember && selectedMember.id !== undefined ? (
           <ul className="info">
             <li>이름: {selectedMember.name}</li>
             <li>부서: {selectedMember.deptName}</li>
